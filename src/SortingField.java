@@ -1,5 +1,5 @@
 public enum SortingField {
-    DATA,
+    DATE,
     SIZE,
     NAME
 }

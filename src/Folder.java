@@ -1,7 +1,9 @@
 import java.util.ArrayList;
+import java.util.*;
 
 public class Folder extends StorageItem{
     ArrayList<StorageItem> folderContent;
+
 
     //constructor
     public Folder(String name){
@@ -64,5 +66,52 @@ public class Folder extends StorageItem{
         }
 
         return null;
+    }
+
+    public void printTree(SortingField field) {
+        if(field == SortingField.NAME) {
+            Comparator<StorageItem> itemNameComparator
+                    = Comparator.comparing(StorageItem::getItemName);
+            folderContent.sort(itemNameComparator);
+            printTree1(folderContent, 0);
+        }
+        if(field == SortingField.DATE) {
+            Comparator<StorageItem> itemDateComparator
+                    = Comparator.comparing(StorageItem::getDate).thenComparing(StorageItem::getItemName);
+            folderContent.sort(itemDateComparator);
+            printTree1(folderContent, 0);
+        }
+        if(field == SortingField.SIZE) {
+            Comparator<StorageItem> itemSizeComparator
+                    = Comparator.comparing(StorageItem::getSize).thenComparing(StorageItem::getItemName);
+            folderContent.sort(itemSizeComparator);
+            printTree1(folderContent, 0);
+        }
+        /*if(field == SortingField.NAME) {
+            Arrays.sort(folderContent,);
+            for(int i = 0; i < this.folderContent.size()-1;i++) {
+                if((folderContent.get(i).itemName.compareTo(folderContent.get(i+1).itemName) <0))  {
+                    StorageItem temp = folderContent.get(i);
+                    folderContent.set(i, folderContent.get(i+1));
+                    folderContent.set(i+1, temp);
+                }
+
+            }
+        }*/
+
+    }
+    void printTree1(ArrayList<StorageItem> folderContent,int i) {
+        for (int j=0; j<folderContent.size(); j++) { // doesnt start from the current father folder, starts from the first child inseted
+            for(int y = 0; y < i; y++) {
+                System.out.print("| ");
+            }
+            if (folderContent.get(j) instanceof File) {
+                System.out.println(folderContent.get(j).itemName);
+            }
+            else {
+                System.out.println(folderContent.get(j).itemName);
+                printTree1(((Folder) (folderContent.get(j))).folderContent, i++);
+            }
+        }
     }
 }

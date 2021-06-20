@@ -13,12 +13,15 @@ abstract class StorageItem {
         setDate();
     }
 
+    public String getItemName() {
+        return this.itemName;
+    }
     public void setDate(){
        // this.itemCreationDate = ;
         long startDate = Timestamp.valueOf("2017-01-01 00:00:00").getTime();
         long endDate = Timestamp.valueOf("2021-12-31 23:59:59").getTime();
         long diff = endDate - startDate + 1;
-        Timestamp rand = new Timestamp(startDate + (long)(Main.rnd.nextInt((int)(diff))));
+        Timestamp rand = new Timestamp(startDate + (long)(Main.rnd.nextDouble() * diff));
     }
 
     abstract int getSize();
@@ -27,16 +30,9 @@ abstract class StorageItem {
         return this.itemCreationDate;
     }
 
-    public void printTree(SortingField field) {
+    public void printTree(SortingField field) {}
 
-        if (field == SortingField.NAME){
-            // decideing who is the starting player
-            if (this.itemName.compareTo(secondPlayer.getName()) > 0) {
-                tempPlayer = startingPlayer;
-                setStartingPlayer(secondPlayer);
-                setSecondPlayer(tempPlayer);
-                Comparator.comparing
-            }
-        }
-    }
+
+
+
 }
