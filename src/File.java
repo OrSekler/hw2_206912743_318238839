@@ -7,18 +7,24 @@ public class File extends StorageItem {
         this.fileContent = new StringBuilder();
     }
 
+    // set & get methods
+
     public void setName(String name, String ext){
         this.itemName = name + "." + ext;
     }
+
     public String getName() {
         return this.itemName;
     }
+
     @Override
     public int getSize() {
         return fileContent.length();
     }
+
     public void printContent(){
-        System.out.println(this.getName() + " Size: " + this.getSize() + "MB Created: " + super.getDate());
+        System.out.println(this.getName() + " Size: "
+                + this.getSize() + "MB Created: " + super.getDate());
         System.out.println(fileContent);
     }
 
